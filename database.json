@@ -1,0 +1,38 @@
+{
+    "employees": [
+        {
+            "id": 0,
+            "fullName": "Jhon Doe",
+            "job_title":"Developer",
+            "img_url": "/img/employees/0.png",
+            "salary": 5000,
+            "formation_ids": []
+        },
+        {
+            "id": 1,
+            "fullName": "HAMZA AMGHARI",
+            "job_title":"Developer",
+            "img_url": "/img/employees/0.png",
+            "salary": 15000,
+            "formation_ids": []
+        },
+        {
+            "id": 2,
+            "fullName": "HICHAM IAMIRI",
+            "job_title":"Developer",
+            "img_url": "/img/employees/0.png",
+            "salary": 6000,
+            "formation_ids": []
+        }
+    ],
+    "formation": [
+        {
+            "id": 0,
+            "title": "Web Dev",
+            "description": "lorem ipsom text",
+            "starting_date": "",
+            "ending_date": "",
+            "state": "ENCOURS"
+        }
+    ]
+}
