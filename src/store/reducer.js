@@ -9,6 +9,12 @@ const initialState = {
   isVisibale: false,
 
   //* Formation
+
+  formations: "",
+  formationFormType: "add", // add or update
+  selectedFormation: "",
+  formationFormVisibility: false,
+
 };
 
 export default function reducer(state = initialState, action) {
@@ -32,6 +38,18 @@ export default function reducer(state = initialState, action) {
       return { ...state, isVisibale: !state.isVisibale };
 
     //* Formation
+
+    case "setFormations":
+      return { ...state, formations: action.payload };
+
+    case "setFormationFormType":
+      return { ...state, formationFormType: action.payload };
+
+    case "setSelectedFormation":
+      return { ...state, selectedFormation: action.payload };
+
+    case "setFormationFormVisibility":
+      return { ...state, formationFormVisibility: action.payload };
 
     default:
       return state;

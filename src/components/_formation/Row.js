@@ -1,44 +1,36 @@
 import { useDispatch } from "react-redux";
 import {
-  setEmployeeFormType,
-  setSelectedEmployee,
-  setEmployeeFormVisibility,
+  setFormationFormType,
+  setSelectedFormation,
+  setFormationFormVisibility,
 } from "../../store/action";
 
 export default function Row(props) {
   const dispatch = useDispatch();
 
   function edit() {
-    dispatch(setEmployeeFormType("update"));
-    dispatch(setSelectedEmployee(props.data));
-    dispatch(setEmployeeFormVisibility(true));
+    dispatch(setFormationFormType("update"));
+    dispatch(setSelectedFormation(props.data));
+    dispatch(setFormationFormVisibility(true));
   }
 
   return (
     <tr class="border-b border-gray-200 dark:border-gray-800">
-      <td class="flex items-center px-6 py-3 font-medium">
-        <input class="mr-4" type="checkbox" name="" id="" />
-        <div class="flex">
-          <img
-            class="object-cover w-10 h-10 mr-4 rounded-full"
-            src="https://i.postimg.cc/WbPKvgBr/pexels-italo-melo-2379005.jpg"
-            alt=""
-          />
-          <div>
-            <p class="text-sm font-medium dark:text-gray-400">
-              {props.data.fullName}
-            </p>
-            <p class="text-xs text-gray-500 dark:text-gray-500">
-              jhon@gmail.com
-            </p>
-          </div>
-        </div>
+     
+      <td class="px-6 p-5 text-sm font-medium dark:text-gray-400">
+        {props.data.title}
       </td>
       <td class="px-6 text-sm font-medium dark:text-gray-400">
-        {props.data.salary}
+        {props.data.starting_date}
       </td>
       <td class="px-6 text-sm font-medium dark:text-gray-400">
-        {props.data.job_title}
+        {props.data.ending_date}
+      </td>
+      <td class="px-6 text-sm font-medium dark:text-gray-400">
+        {props.data.level}
+      </td>
+      <td class="px-6 text-sm font-medium dark:text-gray-400">
+        {props.data.state}
       </td>
 
       <td class="px-6">

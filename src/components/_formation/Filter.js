@@ -1,31 +1,33 @@
 import { useState } from "react";
-import { setEmployeeFormVisibility, setEmployees } from "../../store/action";
+import { setFormationFormVisibility, setFormations } from "../../store/action";
 import { useDispatch } from "react-redux";
 import { fetcher } from "../../utils/crud";
 
 export default function Filter() {
   const dispatch = useDispatch();
 
-  const [fullName, setFullName] = useState("");
-  const [salaryStart, setSalaryStart] = useState("");
-  const [salaryEnd, setSalaryEnd] = useState("");
-  const [jobTitle, setJobTitle] = useState("");
+  const [title, setTitle] = useState("");
+  const [level, setLevel] = useState("");
+  const [startingDate, setStartingDate] = useState("");
+  const [endingDate, setEndingDate] = useState("");
+  const [state, setState] = useState("");
 
   function filter() {
     fetcher(
-      `http://localhost:8000/employees?fullName=${fullName}&salary_gt=${salaryStart}&salary_lt=${salaryEnd}&job_title=${jobTitle}`
+      `http://localhost:8000/formations?title=${0}&starting_date=${startingDate}&ending_date=${endingDate}&level=${level}&state=${state}`
     ).then((data) => {
       console.log(data);
-      dispatch(setEmployees(data));
+      dispatch(setFormations(data));
     });
   }
 
   function reset() {
-    setSalaryStart("");
-    setSalaryEnd("");
-    setFullName("");
-    fetcher("http://localhost:8000/employees").then((data) => {
-      dispatch(setEmployees(data));
+    setTitle("");
+    setLevel("");
+    setStartingDate("");
+    setEndingDate("");
+    fetcher("http://localhost:8000/formations").then((data) => {
+      dispatch(setFormations(data));
     });
   }
 
@@ -57,7 +59,7 @@ export default function Filter() {
                 placeholder="Search by Title, Status , Duration, etc"
               />
               <button
-                onClick={() => dispatch(setEmployeeFormVisibility(true))}
+                onClick={() => dispatch(setFormationFormVisibility(true))}
                 class="rounded-lg ml-5 bg-blue-600 px-8 py-3 font-medium text-white  outline-none hover:opacity-80 focus:ring"
               >
                 Formation
@@ -74,8 +76,8 @@ export default function Filter() {
                 </label>
                 <input
                   type="text"
-                  onChange={(e) => setFullName(e.target.value)}
-                  value={fullName}
+                  onChange={(e) => setTitle(e.target.value)}
+                  value={title}
                   id="name"
                   placeholder="Web Developement In Deepth"
                   class="mt-2 block w-full rounded-md border px-2 py-2 shadow-sm outline-none text-gray-400 bg-gray-900 border-gray-700"
@@ -92,8 +94,8 @@ export default function Filter() {
 
                 <input
                   type="date"
-                  onChange={(e) => setSalaryStart(e.target.value)}
-                  value={salaryStart}
+                  onChange={(e) => setStartingDate(e.target.value)}
+                  value={startingDate}
                   id="date"
                   placeholder="ex: 3000"
                   class="mt-2 block w-full cursor-pointer rounded-md border  px-2 py-2 shadow-sm outline-none text-gray-400 bg-gray-900 border-gray-700"
@@ -108,8 +110,8 @@ export default function Filter() {
                   Ending Date To (Dhs)
                 </label>
                 <input
-                  onChange={(e) => setSalaryEnd(e.target.value)}
-                  value={salaryEnd}
+                  onChange={(e) => setEndingDate(e.target.value)}
+                  value={endingDate}
                   type="date"
                   id="date"
                   placeholder="ex: 5000"
@@ -127,7 +129,7 @@ export default function Filter() {
 
                 <select
                   id="status"
-                  onChange={(e) => setJobTitle(e.target.value)}
+                  onChange={(e) => setState(e.target.value)}
                   class="mt-2 block w-full cursor-pointer rounded-md border  bg-gray-900 text-gray-400 border-gray-700 px-2 py-2 shadow-sm outline-none "
                 >
                   <option value="">All</option>

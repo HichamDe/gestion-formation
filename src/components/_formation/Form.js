@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { saver, fetcher, update } from "../../utils/crud";
 import {
-  setEmployeeFormType,
-  setEmployees,
-  setEmployeeFormVisibility,
-  setSelectedEmployee,
+  setFormationFormType,
+  setFormations,
+  setFormationFormVisibility,
+  setSelectedFormation,
 } from "../../store/action";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -12,70 +12,73 @@ import { useDispatch, useSelector } from "react-redux";
 export default function Form() {
   const dispatch = useDispatch();
 
-  const { employeeFormType, selectedEmployee } = useSelector((state) => {
+  const { formationFormType, selectedFormation } = useSelector((state) => {
     return {
-      employeeFormType: state.employeeFormType,
-      selectedEmployee: state.selectedEmployee,
+      formationFormType: state.formationFormType,
+      selectedFormation: state.selectedFormation,
     };
   });
 
-  const [fullName, setFullName] = useState("");
-  const [jobTitle, setJobTitle] = useState("");
-  const [imgUrl, setImgUrl] = useState("");
-  const [salary, setSalary] = useState("");
+  const [title, setTitle] = useState("");
+  const [level, setLevel] = useState("");
+  const [startingDate, setStartingDate] = useState("");
+  const [endingDate, setEndingDate] = useState("");
+  const [state, setState] = useState("PROGRAMMED");
 
-  function addEmployee() {
-    saver("http://localhost:8000/employees", {
-      fullName: fullName,
-      job_title: jobTitle,
-      img_url: imgUrl,
-      salary: salary,
+  function addFormation() {
+    saver("http://localhost:8000/formations", {
+      title: title,
+      level: level,
+      starting_date: startingDate,
+      ending_date: endingDate,
+      state: state
     });
-    fetcher("http://localhost:8000/employees").then((data) => {
-      dispatch(setEmployees(data));
+    fetcher("http://localhost:8000/formations").then((data) => {
+      dispatch(setFormations(data));
     });
-    dispatch(setEmployeeFormVisibility(false));
+    dispatch(setFormationFormVisibility(false));
   }
 
-  function updateEmployee() {
-    const obj = {
-      fullName: fullName,
-      job_title: jobTitle,
-      img_url: imgUrl,
-      salary: salary,
-    };
+  function updateFormation() {
 
-    update(`http://localhost:8000/employees/${selectedEmployee.id}`, obj);
-
-    fetcher("http://localhost:8000/employees").then((data) => {
-      dispatch(setEmployees(data));
+    update(`http://localhost:8000/formations/${selectedFormation.id}`, {
+      title: title,
+      level: level,
+      starting_date: startingDate,
+      ending_date: endingDate,
+      state: state
     });
 
-    dispatch(setEmployeeFormVisibility(false));
+    fetcher("http://localhost:8000/formations").then((data) => {
+      dispatch(setFormations(data));
+    });
 
-    fetcher("http://localhost:8000/employees").then((data) => {
-      dispatch(setEmployees(data));
+    dispatch(setFormationFormVisibility(false));
+
+    fetcher("http://localhost:8000/formations").then((data) => {
+      dispatch(setFormations(data));
     });
   }
 
   function close() {
-    setFullName("");
-    setJobTitle("");
-    setImgUrl("");
-    setSalary("");
-    dispatch(setEmployeeFormType("add"));
-    dispatch(setSelectedEmployee(""));
-    dispatch(setEmployeeFormVisibility(false));
+    setTitle("");
+    setLevel("");
+    setStartingDate("");
+    setEndingDate("");
+
+    dispatch(setFormationFormType("add"));
+    dispatch(setSelectedFormation(""));
+    dispatch(setFormationFormVisibility(false));
   }
 
   useEffect(() => {
-    if (selectedEmployee) {
-      setFullName(selectedEmployee.fullName);
-      setJobTitle(selectedEmployee.job_title);
-      setImgUrl(selectedEmployee.img_url);
-      setSalary(selectedEmployee.salary);
+    if (selectedFormation) {
+      setTitle(selectedFormation.title);
+      setLevel(selectedFormation.level);
+      setStartingDate(selectedFormation.starting_date);
+      setEndingDate(selectedFormation.ending_date);
     }
-  }, [selectedEmployee]);
+  }, [selectedFormation]);
 
   return (
     <div class="fixed z-20 top-0 left-0 h-[100vh] w-[100%] bg-black/50 flex flex-row-reverse justify-center items-center">
@@ -104,11 +107,11 @@ export default function Form() {
               for="email"
               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              Full Name
+              Title
             </label>
             <input
-              onChange={(e) => setFullName(e.target.value)}
-              value={fullName}
+              onChange={(e) => setTitle(e.target.value)}
+              value={title}
               type="email"
               id="email"
               class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
@@ -121,30 +124,12 @@ export default function Form() {
               for="password"
               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              Job Title
-            </label>
-            <select
-              id="status"
-              onChange={(e) => setJobTitle(e.target.value)}
-              class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-            >
-              <option value="">Select Your Job Title</option>
-              <option>DESIGNER</option>
-              <option>DEVELOPER</option>
-              <option>QA</option>
-            </select>
-          </div>
-          <div class="mb-5">
-            <label
-              for="password"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Profile IMG Url
+              Level Number
             </label>
             <input
-              onChange={(e) => setImgUrl(e.target.value)}
-              value={imgUrl}
-              type="text"
+              onChange={(e) => setLevel(e.target.value)}
+              value={level}
+              type="number"
               id="password"
               class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
               required
@@ -152,21 +137,39 @@ export default function Form() {
           </div>
           <div class="mb-5">
             <label
-              for="repeat-password"
+              for="password"
               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              Salary
+              Starting Date
             </label>
             <input
-              onChange={(e) => setSalary(e.target.value)}
-              value={salary}
-              type="number"
-              id="repeat-password"
+              onChange={(e) => setStartingDate(e.target.value)}
+              value={startingDate}
+              type="date"
+              id="password"
               class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
               required
             />
           </div>
-          {employeeFormType == "add" ? (
+          <div class="mb-5">
+            <label
+              for="password"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Ending Date
+            </label>
+            <input
+              onChange={(e) => setEndingDate(e.target.value)}
+              value={endingDate}
+              type="date"
+              id="password"
+              class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+              required
+            />
+          </div>
+
+          {formationFormType == "add" ? (
+
             <div class="flex items-start mb-5">
               <label
                 for="terms"
@@ -177,30 +180,49 @@ export default function Form() {
                   href="#"
                   class="text-red-600 hover:underline dark:text-red-500"
                 >
-                  Employees !!
+                  Formations !!
                 </a>
               </label>
             </div>
+
           ) : (
-            ""
+            <div class="mb-5">
+              <label
+                for="password"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                State
+              </label>
+              <select
+                id="status"
+                onChange={(e) => setState(e.target.value)}
+                value={state}
+                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+              >
+                <option>ACTIVE</option>
+                <option>COMPLETED</option>
+                <option>CANCELED</option>
+                <option>PROGRAMMED</option>
+              </select>
+            </div>
           )}
           <div class="basis-[100%] flex justify-start items-center">
-            {employeeFormType == "add" ? (
+            {formationFormType == "add" ? (
               <button
                 type="button"
-                onClick={addEmployee}
+                onClick={addFormation}
                 class="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
-                Add Employee
+                Add Formation
               </button>
             ) : (
               <>
                 <button
                   type="button"
-                  onClick={updateEmployee}
+                  onClick={updateFormation}
                   class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                 >
-                  Update Employee
+                  Update Formation
                 </button>
               </>
             )}

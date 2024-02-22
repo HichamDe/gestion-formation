@@ -48,30 +48,24 @@
       "job_title": "DEVELOPER",
       "img_url": "sfdgsdfsdf s",
       "salary": 8000
-    },
-    {
-      "id": "afca",
-      "fullName": "AYOUB",
-      "job_title": "DEVELOPER",
-      "img_url": "sfdgsdfsdf s",
-      "salary": 8000
-    },
-    {
-      "fullName": "JHON DOE",
-      "job_title": "DEVELOPER",
-      "img_url": "BLA BLA",
-      "salary": 7000,
-      "id": "83de"
     }
   ],
-  "formation": [
+  "formations": [
     {
-      "id": "",
-      "title": "",
-      "level": "",
-      "starting_date": "",
-      "ending_date": "",
-      "state": ""
+      "title": "WEB FULL STACK",
+      "level": "1",
+      "starting_date": "2024-02-23",
+      "ending_date": "2024-02-25",
+      "state": "COMPLETED",
+      "id": "79b1"
+    },
+    {
+      "title": "DATABASE ADMINISTRATION",
+      "level": "5",
+      "starting_date": "2024-03-05",
+      "ending_date": "2024-03-19",
+      "state": "PROGRAMMED",
+      "id": "a3c3"
     }
   ]
 }

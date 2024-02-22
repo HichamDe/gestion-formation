@@ -7,24 +7,24 @@ import Filter from "../components/_formation/Filter";
 import Form from "../components/_formation/Form";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { setEmployees } from "../store/action";
+import { setFormations } from "../store/action";
 
 export default function Formation() {
   const dispatch = useDispatch();
 
-  const { isVisibale, employees, employeeFormVisibility } = useSelector(
+  const { isVisibale, formations, formationFormVisibility } = useSelector(
     (state) => {
       return {
-        employeeFormVisibility: state.employeeFormVisibility,
+        formationFormVisibility: state.formationFormVisibility,
         isVisibale: state.isVisibale,
-        employees: state.employees,
+        formations: state.formations,
       };
     }
   );
 
   useEffect(() => {
-    fetcher("http://localhost:8000/employees").then((data) => {
-      dispatch(setEmployees(data));
+    fetcher("http://localhost:8000/formations").then((data) => {
+      dispatch(setFormations(data));
     });
   }, []);
 
@@ -33,7 +33,7 @@ export default function Formation() {
       <div class="xl:h-screen bg-gray-800">
         {isVisibale ? <Slider /> : ""}
         <Nav />
-        {employeeFormVisibility ? <Form /> : ""}
+        {formationFormVisibility ? <Form /> : ""}
         <Filter />
         <div className="max-w-screen-xl m-auto">
           <div class="justify-center flex-1 max-w-6xl px-4 py-4 mx-auto lg:py-8 md:px-6">
@@ -41,10 +41,7 @@ export default function Formation() {
               <table class="w-full table-auto">
                 <thead class="bg-lightGray-50">
                   <tr class="text-xs text-left text-gray-500 border-b border-gray-200 dark:border-gray-800">
-                    <th class="flex items-center py-4 pl-6 font-medium dark:text-gray-400">
-                      <input class="mr-4" type="checkbox" name="" id="" />
-                      <span>Select</span>
-                    </th>
+                   
                     <th class="px-6 py-4 font-medium dark:text-gray-400">
                       Title
                     </th>
@@ -66,9 +63,9 @@ export default function Formation() {
                   </tr>
                 </thead>
                 <tbody>
-                  {/* {employees
-                    ? employees.map((employee) => <Row data={employee} />)
-                    : ""} */}
+                  {formations
+                    ? formations.map((formation) => <Row data={formation} />)
+                    : ""}
                 </tbody>
               </table>
             </div>
