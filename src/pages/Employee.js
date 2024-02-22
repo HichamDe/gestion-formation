@@ -1,20 +1,30 @@
 import { useEffect, useState } from "react";
 import Nav from "../components/Nav";
-import Slider from "../components/_employee/Slider";
-import { useSelector } from "react-redux";
-import fetcher from "../utils/fetcher";
+import Slider from "../components/Slider";
+import { fetcher } from "../utils/crud";
 import Row from "../components/_employee/Row";
+import Filter from "../components/_employee/Filter";
 import Form from "../components/_employee/Form";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { setEmployees } from "../store/action";
 
 export default function Employee() {
-  const isVisibale = useSelector((state) => {
-    return state.isVisibale;
-  });
-  const [employees, setEmployees] = useState("");
+  const dispatch = useDispatch();
+
+  const { isVisibale, employees, employeeFormVisibility } = useSelector(
+    (state) => {
+      return {
+        employeeFormVisibility: state.employeeFormVisibility,
+        isVisibale: state.isVisibale,
+        employees: state.employees,
+      };
+    }
+  );
 
   useEffect(() => {
     fetcher("http://localhost:8000/employees").then((data) => {
-      setEmployees(data);
+      dispatch(setEmployees(data));
     });
   }, []);
 
@@ -23,8 +33,9 @@ export default function Employee() {
       <div class="xl:h-screen bg-gray-800">
         {isVisibale ? <Slider /> : ""}
         <Nav />
-        <Form />
-        <div className="max-w-screen-xl m-auto border-2">
+        {employeeFormVisibility ? <Form /> : ""}
+        <Filter />
+        <div className="max-w-screen-xl m-auto">
           <div class="justify-center flex-1 max-w-6xl px-4 py-4 mx-auto lg:py-8 md:px-6">
             <div class="overflow-x-auto rounded shadow dark:bg-gray-900 bg-white">
               <table class="w-full table-auto">

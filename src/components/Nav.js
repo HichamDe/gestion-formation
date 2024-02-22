@@ -3,8 +3,10 @@ import { setIsVisibale } from "../store/action";
 
 export default function Nav() {
   const dispatch = useDispatch();
+
+  
   return (
-    <section class="sticky top-0 z-40 px-3 py-3 bg-white shadow dark:text-gray-100 dark:bg-gray-900 lg:px-5">
+    <section class="sticky top-0 z-20 px-3 py-3 bg-white shadow dark:text-gray-100 dark:bg-gray-900 lg:px-5">
       <nav class="relative">
         <div class="flex items-center justify-between">
           <div>
@@ -26,7 +28,7 @@ export default function Nav() {
               </svg>
             </button>
           </div>
-          <div class="justify-center hidden md:flex">
+          <div class="justify-center hidden ">
             <div class=" xl:w-96">
               <div class="relative flex flex-wrap items-center w-full ">
                 <input

@@ -1,38 +1,77 @@
 {
-    "employees": [
-        {
-            "id": 0,
-            "fullName": "Jhon Doe",
-            "job_title":"Developer",
-            "img_url": "/img/employees/0.png",
-            "salary": 5000,
-            "formation_ids": []
-        },
-        {
-            "id": 1,
-            "fullName": "HAMZA AMGHARI",
-            "job_title":"Developer",
-            "img_url": "/img/employees/0.png",
-            "salary": 15000,
-            "formation_ids": []
-        },
-        {
-            "id": 2,
-            "fullName": "HICHAM IAMIRI",
-            "job_title":"Developer",
-            "img_url": "/img/employees/0.png",
-            "salary": 6000,
-            "formation_ids": []
-        }
-    ],
-    "formation": [
-        {
-            "id": 0,
-            "title": "Web Dev",
-            "description": "lorem ipsom text",
-            "starting_date": "",
-            "ending_date": "",
-            "state": "ENCOURS"
-        }
-    ]
+  "employees": [
+    {
+      "fullName": "HMAZA",
+      "job_title": "DESIGNER",
+      "img_url": "",
+      "salary": 15000,
+      "id": "9b7d"
+    },
+    {
+      "fullName": "HICHAM IAMIRI",
+      "job_title": "QA",
+      "img_url": "",
+      "salary": 6000,
+      "id": "48eb"
+    },
+    {
+      "fullName": "YOUSEF",
+      "job_title": "DESIGNER",
+      "img_url": "img",
+      "salary": 6000,
+      "id": "53c8"
+    },
+    {
+      "id": "2fb6",
+      "fullName": "ISLAM KHOZAYBI",
+      "job_title": "DESIGNER",
+      "img_url": "",
+      "salary": 1000
+    },
+    {
+      "id": "0900",
+      "fullName": "SAADIA",
+      "job_title": "DEVELOPER",
+      "img_url": "",
+      "salary": 6000
+    },
+    {
+      "id": "abc8",
+      "fullName": "SAADIA",
+      "job_title": "DEVELOPER",
+      "img_url": "",
+      "salary": 6000
+    },
+    {
+      "id": "9c09",
+      "fullName": "AYOUB",
+      "job_title": "DEVELOPER",
+      "img_url": "sfdgsdfsdf s",
+      "salary": 8000
+    },
+    {
+      "id": "afca",
+      "fullName": "AYOUB",
+      "job_title": "DEVELOPER",
+      "img_url": "sfdgsdfsdf s",
+      "salary": 8000
+    },
+    {
+      "fullName": "JHON DOE",
+      "job_title": "DEVELOPER",
+      "img_url": "BLA BLA",
+      "salary": 7000,
+      "id": "83de"
+    }
+  ],
+  "formation": [
+    {
+      "id": "",
+      "title": "",
+      "level": "",
+      "starting_date": "",
+      "ending_date": "",
+      "state": ""
+    }
+  ]
 }

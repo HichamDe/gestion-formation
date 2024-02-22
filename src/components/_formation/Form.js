@@ -97,7 +97,7 @@ export default function Form() {
 
       <div class="flex flex-wrap justify-center items-center gap-4 border lg:w-[30%] md:w-[40%] w-[60%] p-5 rounded-lg border-gray-700 bg-gray-900 ">
         <form class="max-w-sm mx-auto">
-          <h1 className="text-white text-4xl mb-5 text-bold">{ employeeFormType == "add" ? "Add":"Update" } Employee</h1>
+          <h1 className="text-white text-4xl mb-5 text-bold"> Add Formation</h1>
 
           <div class="mb-5">
             <label
