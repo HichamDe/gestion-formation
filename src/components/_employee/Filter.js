@@ -15,8 +15,16 @@ export default function Filter() {
     fetcher(
       `http://localhost:8000/employees?salary_lt=${salaryEnd}&salary_gt=${salaryStart}&diploma=${diploma}`
     ).then((data) => {
-      console.log(data);
-      dispatch(setEmployees(data));
+
+      const result = [];
+      data.forEach((employee) => {
+        if (employee.fullName.toLowerCase().search(fullName.toLowerCase())) {
+          result.push(employee);
+        }
+      })
+
+
+      dispatch(setEmployees(result ? data : result));
     });
   }
 
@@ -111,9 +119,10 @@ export default function Filter() {
                   onChange={(e) => setSalaryEnd(e.target.value)}
                   value={salaryEnd}
                   type="number"
+                  disabled
                   id="date"
                   placeholder="ex: 5000"
-                  class="mt-2 block w-full cursor-pointer rounded-md border  px-2 py-2 shadow-sm outline-none text-gray-400 bg-gray-900 border-gray-700"
+                  class="mt-2 block w-full cursor-pointer rounded-md border  px-2 py-2 shadow-sm outline-none text-gray-400 bg-gray-800 border-gray-700"
                 />
               </div>
 

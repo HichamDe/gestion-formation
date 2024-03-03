@@ -22,7 +22,7 @@ export default function Form() {
   const [fullName, setFullName] = useState("");
   const [diploma, setDiploma] = useState("");
   const [imgUrl, setImgUrl] = useState("");
-  const [salary, setSalary] = useState(0);
+  const [salary, setSalary] = useState("");
 
   function addEmployee() {
     saver("http://localhost:8000/employees", {

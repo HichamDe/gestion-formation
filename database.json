@@ -1,6 +1,26 @@
 {
   "employees": [
-   
+    {
+      "id": "4ab1",
+      "fullName": "HICHAM IAMIRI",
+      "diploma": "Technicien Spécialisé",
+      "img_url": "",
+      "salary": 8000
+    },
+    {
+      "id": "5b05",
+      "fullName": "HAMZA AMGHARI",
+      "diploma": "Ingenieur",
+      "img_url": "",
+      "salary": 9000
+    },
+    {
+      "id": "29bb",
+      "fullName": "JHON DOE",
+      "diploma": "Technicien",
+      "img_url": "",
+      "salary": 15000
+    }
   ],
   "formations": [
     {
