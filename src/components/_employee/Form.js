@@ -20,36 +20,34 @@ export default function Form() {
   });
 
   const [fullName, setFullName] = useState("");
-  const [jobTitle, setJobTitle] = useState("");
+  const [diploma, setDiploma] = useState("");
   const [imgUrl, setImgUrl] = useState("");
-  const [salary, setSalary] = useState("");
+  const [salary, setSalary] = useState(0);
 
   function addEmployee() {
     saver("http://localhost:8000/employees", {
       fullName: fullName,
-      job_title: jobTitle,
+      diploma: diploma,
       img_url: imgUrl,
       salary: salary,
     });
+
+    dispatch(setEmployeeFormVisibility(false));
+
     fetcher("http://localhost:8000/employees").then((data) => {
       dispatch(setEmployees(data));
     });
-    dispatch(setEmployeeFormVisibility(false));
   }
 
   function updateEmployee() {
     const obj = {
       fullName: fullName,
-      job_title: jobTitle,
+      diploma: diploma,
       img_url: imgUrl,
       salary: salary,
     };
 
     update(`http://localhost:8000/employees/${selectedEmployee.id}`, obj);
-
-    fetcher("http://localhost:8000/employees").then((data) => {
-      dispatch(setEmployees(data));
-    });
 
     dispatch(setEmployeeFormVisibility(false));
 
@@ -60,7 +58,7 @@ export default function Form() {
 
   function close() {
     setFullName("");
-    setJobTitle("");
+    setDiploma("");
     setImgUrl("");
     setSalary("");
     dispatch(setEmployeeFormType("add"));
@@ -71,7 +69,7 @@ export default function Form() {
   useEffect(() => {
     if (selectedEmployee) {
       setFullName(selectedEmployee.fullName);
-      setJobTitle(selectedEmployee.job_title);
+      setDiploma(selectedEmployee.diploma);
       setImgUrl(selectedEmployee.img_url);
       setSalary(selectedEmployee.salary);
     }
@@ -97,7 +95,7 @@ export default function Form() {
 
       <div class="flex flex-wrap justify-center items-center gap-4 border lg:w-[30%] md:w-[40%] w-[60%] p-5 rounded-lg border-gray-700 bg-gray-900 ">
         <form class="max-w-sm mx-auto">
-          <h1 className="text-white text-4xl mb-5 text-bold">{ employeeFormType == "add" ? "Add":"Update" } Employee</h1>
+          <h1 className="text-white text-4xl mb-5 text-bold">{employeeFormType == "add" ? "Add" : "Update"} Employee</h1>
 
           <div class="mb-5">
             <label
@@ -121,18 +119,18 @@ export default function Form() {
               for="password"
               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              Job Title
+              Diploma
             </label>
             <select
               id="status"
-              onChange={(e) => setJobTitle(e.target.value)}
-              value={jobTitle}
+              onChange={(e) => setDiploma(e.target.value)}
+              value={diploma}
               class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
             >
-              <option value="">Select Your Job Title</option>
-              <option>DESIGNER</option>
-              <option>DEVELOPER</option>
-              <option>QA</option>
+              <option value="">Select Your Diploma</option>
+              <option>Technicien</option>
+              <option>Technicien Spécialisé</option>
+              <option>Ingenieur</option>
             </select>
           </div>
           <div class="mb-5">
@@ -146,7 +144,6 @@ export default function Form() {
               onChange={(e) => setImgUrl(e.target.value)}
               value={imgUrl}
               type="text"
-              id="password"
               class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
               required
             />
@@ -159,10 +156,9 @@ export default function Form() {
               Salary
             </label>
             <input
-              onChange={(e) => setSalary(e.target.value)}
+              onChange={(e) => { setSalary(parseInt(e.target.value)) }}
               value={salary}
               type="number"
-              id="repeat-password"
               class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
               required
             />

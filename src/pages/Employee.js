@@ -49,7 +49,7 @@ export default function Employee() {
                       Salary
                     </th>
                     <th class="px-6 py-4 font-medium dark:text-gray-400">
-                      Job Title
+                      Diploma
                     </th>
                     <th class="px-6 py-4 font-medium dark:text-gray-400">
                       Actions

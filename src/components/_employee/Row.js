@@ -38,7 +38,7 @@ export default function Row(props) {
         {props.data.salary}
       </td>
       <td class="px-6 text-sm font-medium dark:text-gray-400">
-        {props.data.job_title}
+        {props.data.diploma}
       </td>
 
       <td class="px-6">

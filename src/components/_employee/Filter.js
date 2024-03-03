@@ -9,11 +9,11 @@ export default function Filter() {
   const [fullName, setFullName] = useState("");
   const [salaryStart, setSalaryStart] = useState("");
   const [salaryEnd, setSalaryEnd] = useState("");
-  const [jobTitle, setJobTitle] = useState("");
+  const [diploma, setDiploma] = useState("");
 
   function filter() {
     fetcher(
-      `http://localhost:8000/employees?fullName=${fullName}&salary_gt=${salaryStart}&salary_lt=${salaryEnd}&job_title=${jobTitle}`
+      `http://localhost:8000/employees?salary_lt=${salaryEnd}&salary_gt=${salaryStart}&diploma=${diploma}`
     ).then((data) => {
       console.log(data);
       dispatch(setEmployees(data));
@@ -122,18 +122,18 @@ export default function Filter() {
                   for="status"
                   class="text-sm font-medium dark:text-gray-500"
                 >
-                  Job Title
+                  Diploma
                 </label>
 
                 <select
                   id="status"
-                  onChange={(e) => setJobTitle(e.target.value)}
+                  onChange={(e) => setDiploma(e.target.value)}
                   class="mt-2 block w-full cursor-pointer rounded-md border  bg-gray-900 text-gray-400 border-gray-700 px-2 py-2 shadow-sm outline-none "
                 >
                   <option value="">All</option>
-                  <option>DESIGNER</option>
-                  <option>DEVELOPER</option>
-                  <option>QA</option>
+                  <option>Technicien</option>
+                  <option>Technicien Spécialisé</option>
+                  <option>Ingenieur</option>
                 </select>
               </div>
             </div>
