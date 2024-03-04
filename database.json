@@ -45,20 +45,21 @@
       "starting_date": "2024-03-07",
       "ending_date": "2024-03-07",
       "state": "PROGRAMMED",
-      "assign": [
-        "d344",
-        "8b6d"
-      ],
+      "assign": [],
       "id": "caac"
     },
     {
-      "id": "a1c8",
       "title": "JAVASCRIPT",
       "level": "5",
       "starting_date": "2024-03-07",
       "ending_date": "2024-03-19",
       "state": "PROGRAMMED",
-      "assign": []
+      "assign": [
+        "d344",
+        "8b6d",
+        "b47b"
+      ],
+      "id": "a1c8"
     }
   ]
 }

@@ -78,7 +78,6 @@ export default function Formation() {
           });
           setFormations("")
 
-
           return <Row changeable={true} data={formation} />;
         }
       } else {

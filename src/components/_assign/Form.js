@@ -9,7 +9,7 @@ export default function Form() {
     const [employees, setEmployees] = useState(""); // All Employees
     const [assignEmployeeId, setAssignEmployeeId] = useState(""); // the selected emplyee to be assigned
     const { assignFormType, selectedFormationAssign } = useSelector(state => state); // selected Cours
-
+    const [selectedDiploma, setSelectedDiploma] = useState("");
 
     function assign() {
         if (checkFormationAssignContraints(selectedFormationAssign.assign, assignEmployeeId)) {
@@ -34,6 +34,7 @@ export default function Form() {
 
         // dispatch(setAssignFormType("add"));
         dispatch(setAssignFormVisibility(false));
+        dispatch(setSelectedFormationAssign("")); 
     }
 
     useEffect(() => {
@@ -43,7 +44,6 @@ export default function Form() {
 
 
     }, [])
-
 
     function getEmloyee(id) {
         let AssignedEmployee = {};
@@ -61,12 +61,26 @@ export default function Form() {
                 </td>
 
                 <td class="px-6 text-sm font-medium dark:text-gray-400">
-                    <button>Remove</button>
+                    <button onClick={() => removeAssignedEmployee(AssignedEmployee.id)}>Remove</button>
                 </td>
             </tr>
         )
 
 
+    }
+
+    function removeAssignedEmployee(id) {
+        function checkEmployee(assignedId) {
+            return assignedId != id;
+        }
+        update(`http://localhost:8000/formations/${selectedFormationAssign.id}`, {
+            title: selectedFormationAssign.title,
+            level: selectedFormationAssign.level,
+            starting_date: selectedFormationAssign.starting_date,
+            ending_date: selectedFormationAssign.ending_date,
+            state: selectedFormationAssign.state,
+            assign: selectedFormationAssign.assign.filter(checkEmployee)
+        });
     }
 
     function checkFormationAssignContraints(assign, id) {
@@ -80,6 +94,28 @@ export default function Form() {
 
     }
 
+    function assignByDiploma() {
+        fetcher(`http://localhost:8000/employees?diploma=${selectedDiploma}`).then((employees) => {
+            employees.forEach(employee => {
+                if (checkFormationAssignContraints(selectedFormationAssign.assign, employee.id)) {
+                    selectedFormationAssign.assign.push(employee.id)
+                    update(`http://localhost:8000/formations/${selectedFormationAssign.id}`, {
+                        title: selectedFormationAssign.title,
+                        level: selectedFormationAssign.level,
+                        starting_date: selectedFormationAssign.starting_date,
+                        ending_date: selectedFormationAssign.ending_date,
+                        state: selectedFormationAssign.state,
+                        assign: selectedFormationAssign.assign
+                    });
+                    dispatch(setSelectedFormationAssign(""));
+                    dispatch(setAssignFormVisibility(false));
+                } else {
+                    alert("One of the diploma owners is already assigned")
+                    return false;
+                }
+            })
+        })
+    }
     return (
         <div class="fixed z-20 top-0 left-0 h-[100vh] w-[100%] bg-black/50 flex flex-col justify-center items-center">
             <div className="lg:w-[30%] md:w-[40%] w-[60%]">
@@ -148,7 +184,7 @@ export default function Form() {
                                         Select Diploma
                                     </label>
                                     <select
-                                        onChange={(e) => setAssignEmployeeId(e.target.value)}
+                                        onChange={(e) => setSelectedDiploma(e.target.value)}
                                         id="status"
                                         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                                     >
@@ -188,7 +224,7 @@ export default function Form() {
                         assignFormType == "byDiploma" ?
                             <div class="basis-[100%] flex justify-start items-center">
                                 <button
-                                    onClick={assign}
+                                    onClick={assignByDiploma}
                                     type="button"
                                     class="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                                 >
