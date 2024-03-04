@@ -31,35 +31,13 @@
   ],
   "formations": [
     {
-      "title": "MONGO DB ADVANCEDD",
-      "level": "2",
-      "starting_date": "2024-03-05",
-      "ending_date": "2024-03-07",
+      "title": "hicha.bsns@gmail.com",
+      "level": "20",
+      "starting_date": "2024-03-06",
+      "ending_date": "2024-03-15",
       "state": "CANCELED",
       "assign": [],
-      "id": "c64f"
-    },
-    {
-      "title": "WEB FULL STACK",
-      "level": "2",
-      "starting_date": "2024-03-07",
-      "ending_date": "2024-03-07",
-      "state": "PROGRAMMED",
-      "assign": [],
-      "id": "caac"
-    },
-    {
-      "title": "JAVASCRIPT",
-      "level": "5",
-      "starting_date": "2024-03-07",
-      "ending_date": "2024-03-19",
-      "state": "PROGRAMMED",
-      "assign": [
-        "d344",
-        "8b6d",
-        "b47b"
-      ],
-      "id": "a1c8"
+      "id": "7c0d"
     }
   ]
 }

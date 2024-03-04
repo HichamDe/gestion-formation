@@ -48,7 +48,6 @@ export default function Formation() {
       const currentDate = new Date();
 
       if (daysDiff(startingDate, currentDate) <= 0) {
-        console.log(daysDiff(endingDate, startingDate))
         if (daysDiff(endingDate, currentDate) <= 0) {
           // COMPLETED
           formation.state = "COMPLETED"

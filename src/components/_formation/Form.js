@@ -26,19 +26,30 @@ export default function Form() {
   const [state, setState] = useState("PROGRAMMED");
 
   function addFormation() {
-    saver("http://localhost:8000/formations", {
-      title: title,
-      level: level,
-      starting_date: startingDate,
-      ending_date: endingDate,
-      state: state,
-      assign:[]
 
-    });
-    fetcher("http://localhost:8000/formations").then((data) => {
-      dispatch(setFormations(data));
-    });
-    dispatch(setFormationFormVisibility(false));
+    // console.log(((endingDate - startingDate) / (1000 * 60 * 60 * 24)))
+    // console.log(((startingDate - new Date()) / (1000 * 60 * 60 * 24)))
+
+
+    if (((new Date(endingDate) - new Date(startingDate)) / (1000 * 60 * 60 * 24)) >= 0 && ((new Date(startingDate) - new Date()) / (1000 * 60 * 60 * 24)) >= 0) {
+      saver("http://localhost:8000/formations", {
+        title: title,
+        level: level,
+        starting_date: startingDate,
+        ending_date: endingDate,
+        state: state,
+        assign: []
+
+      });
+      fetcher("http://localhost:8000/formations").then((data) => {
+        dispatch(setFormations(data));
+      });
+      dispatch(setFormationFormVisibility(false));
+    } else {
+      alert("Fix Your Starting and Ending Dates")
+    }
+
+
   }
 
   function updateFormation() {
@@ -49,7 +60,7 @@ export default function Form() {
       starting_date: startingDate,
       ending_date: endingDate,
       state: state,
-      assign:[]
+      assign: selectedFormation.assign
 
     });
 
@@ -213,7 +224,7 @@ export default function Form() {
                   for="terms"
                   class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                 >
-                  Note That You Can't Go Back After 
+                  Note That You Can't Go Back After
                   <a
                     href="#"
                     class="text-red-600 ms-1 hover:underline dark:text-red-500"
