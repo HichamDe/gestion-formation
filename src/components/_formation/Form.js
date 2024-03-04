@@ -31,7 +31,9 @@ export default function Form() {
       level: level,
       starting_date: startingDate,
       ending_date: endingDate,
-      state: state
+      state: state,
+      assign:[]
+
     });
     fetcher("http://localhost:8000/formations").then((data) => {
       dispatch(setFormations(data));
@@ -46,7 +48,9 @@ export default function Form() {
       level: level,
       starting_date: startingDate,
       ending_date: endingDate,
-      state: state
+      state: state,
+      assign:[]
+
     });
 
     fetcher("http://localhost:8000/formations").then((data) => {

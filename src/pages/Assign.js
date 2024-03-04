@@ -4,7 +4,7 @@ import Slider from "../components/Slider";
 import { fetcher } from "../utils/crud";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { setFormations, setAssignFormVisibility, setSelectedFormationAssign } from "../store/action";
+import { setFormations, setAssignFormVisibility, setSelectedFormationAssign, setAssignFormType } from "../store/action";
 import Form from "../components/_assign/Form";
 
 export default function Formation() {
@@ -39,9 +39,17 @@ export default function Formation() {
                                                 <button onClick={() => {
                                                     dispatch(setSelectedFormationAssign(formation))
                                                     dispatch(setAssignFormVisibility(true))
+                                                    dispatch(setAssignFormType(""))
 
                                                 }} type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Assign Employee</button>
-                                                <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Assign By Diploma</button>
+                                                <button
+                                                    onClick={() => {
+                                                        dispatch(setSelectedFormationAssign(formation))
+                                                        dispatch(setAssignFormVisibility(true))
+                                                        dispatch(setAssignFormType("byDiploma"))
+
+                                                    }}
+                                                    type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Assign By Diploma</button>
 
 
                                             </div>

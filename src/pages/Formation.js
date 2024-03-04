@@ -52,11 +52,32 @@ export default function Formation() {
         if (daysDiff(endingDate, currentDate) <= 0) {
           // COMPLETED
           formation.state = "COMPLETED"
+          update(`http://localhost:8000/formations/${formation.id}`, {
+            title: formation.title,
+            level: formation.level,
+            starting_date: formation.starting_date,
+            ending_date: formation.ending_date,
+            state: "COMPLETED",
+            assign: formation.assign
+
+          });
+          setFormations("")
 
           return <Row changeable={false} data={formation} />;
         } else {
           // Updating to Active
           formation.state = "ACTIVE"
+          update(`http://localhost:8000/formations/${formation.id}`, {
+            title: formation.title,
+            level: formation.level,
+            starting_date: formation.starting_date,
+            ending_date: formation.ending_date,
+            state: "ACTIVE",
+            assign: formation.assign
+
+          });
+          setFormations("")
+
 
           return <Row changeable={true} data={formation} />;
         }

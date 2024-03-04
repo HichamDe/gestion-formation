@@ -13,7 +13,7 @@ export function fetcher(url) {
 /**
  * This function is using AXIOS
  */
-export function update(url, data, id) {
+export function update(url, data) {
   return axios
     .put(url, data)
     .then((res) => {

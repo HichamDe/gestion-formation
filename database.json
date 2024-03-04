@@ -3,7 +3,7 @@
     {
       "fullName": "HICHAM IAMIRI",
       "diploma": "Technicien",
-      "img_url": "",
+      "img_url": "dfgf",
       "salary": 3000,
       "id": "d344"
     },
@@ -13,39 +13,52 @@
       "diploma": "Ingenieur",
       "img_url": "",
       "salary": 15000
+    },
+    {
+      "id": "e3ac",
+      "fullName": "HAMZA AMGHARI",
+      "diploma": "Technicien Spécialisé",
+      "img_url": "",
+      "salary": 6000
+    },
+    {
+      "id": "8b6d",
+      "fullName": "HMAD OBIHI",
+      "diploma": "Ingenieur",
+      "img_url": "",
+      "salary": 9000
     }
   ],
   "formations": [
     {
-      "title": "WEB FULL STACK",
-      "level": "10",
-      "starting_date": "2024-03-01",
-      "ending_date": "2024-03-02",
-      "state": "PROGRAMMED",
-      "id": "c344"
-    },
-    {
-      "title": "MONGO DB ADVANCED",
-      "level": "15",
-      "starting_date": "2024-03-02",
-      "ending_date": "2024-03-05",
-      "state": "PROGRAMMED",
-      "id": "b615"
-    },
-    {
-      "title": "REACT JS",
-      "level": "1",
-      "starting_date": "2024-03-12",
-      "ending_date": "2024-03-21",
+      "title": "MONGO DB ADVANCEDD",
+      "level": "2",
+      "starting_date": "2024-03-05",
+      "ending_date": "2024-03-07",
       "state": "CANCELED",
-      "id": "52a7"
-    }
-  ],
-  "assign": [
+      "assign": [],
+      "id": "c64f"
+    },
     {
-      "id": "e247",
-      "formation_id": "c344",
-      "employee_id": "b47b"
+      "title": "WEB FULL STACK",
+      "level": "2",
+      "starting_date": "2024-03-07",
+      "ending_date": "2024-03-07",
+      "state": "PROGRAMMED",
+      "assign": [
+        "d344",
+        "8b6d"
+      ],
+      "id": "caac"
+    },
+    {
+      "id": "a1c8",
+      "title": "JAVASCRIPT",
+      "level": "5",
+      "starting_date": "2024-03-07",
+      "ending_date": "2024-03-19",
+      "state": "PROGRAMMED",
+      "assign": []
     }
   ]
 }

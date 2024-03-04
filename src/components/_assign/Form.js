@@ -1,23 +1,33 @@
-import { saver, fetcher } from "../../utils/crud";
+import { update, fetcher } from "../../utils/crud";
 import { useDispatch, useSelector } from "react-redux";
-import { setAssignFormType, setAssignFormVisibility, setFormations } from "../../store/action"
+import { setSelectedFormationAssign, setAssignFormType, setAssignFormVisibility, setFormations } from "../../store/action"
 import { useEffect, useState } from "react";
 
 export default function Form() {
 
     const dispatch = useDispatch();
-    const [employees, setEmployees] = useState("");
-    const [assignedEmployees, setAssignedEmployees] = useState("");
-    const [assignEmployeeId, setAssignEmployeeId] = useState("")
-    const { assignFormType, selectedFormationAssign } = useSelector(state => state);
+    const [employees, setEmployees] = useState(""); // All Employees
+    const [assignEmployeeId, setAssignEmployeeId] = useState(""); // the selected emplyee to be assigned
+    const { assignFormType, selectedFormationAssign } = useSelector(state => state); // selected Cours
 
 
     function assign() {
-        saver("http://localhost:8000/assign", {
-            formation_id: selectedFormationAssign.id,
-            employee_id: assignEmployeeId
-        });
-        dispatch(setAssignFormVisibility(false));
+        if (checkFormationAssignContraints(selectedFormationAssign.assign, assignEmployeeId)) {
+            selectedFormationAssign.assign.push(assignEmployeeId)
+            update(`http://localhost:8000/formations/${selectedFormationAssign.id}`, {
+                title: selectedFormationAssign.title,
+                level: selectedFormationAssign.level,
+                starting_date: selectedFormationAssign.starting_date,
+                ending_date: selectedFormationAssign.ending_date,
+                state: selectedFormationAssign.state,
+                assign: selectedFormationAssign.assign
+            });
+            dispatch(setSelectedFormationAssign(""));
+            dispatch(setAssignFormVisibility(false));
+        } else {
+            alert("You Can't add an Employee Twice")
+        }
+
     }
 
     function close() {
@@ -29,18 +39,46 @@ export default function Form() {
     useEffect(() => {
         fetcher("http://localhost:8000/employees").then((data) => {
             setEmployees(data);
-        }).then(() => {
-            fetcher("http://localhost:8000/assign").then((data) => {
-
-                data.forEach((relation) => {
-                    
-                })
-            })
-        });
+        })
 
 
     }, [])
 
+
+    function getEmloyee(id) {
+        let AssignedEmployee = {};
+        employees.forEach((employee) => {
+            if (employee.id == id) AssignedEmployee = employee;
+        })
+
+        return (
+            <tr class="border-b border-gray-200 dark:border-gray-800">
+                <td class="px-6 text-sm font-medium dark:text-gray-400">
+                    {AssignedEmployee.fullName}
+                </td>
+                <td class="px-6 text-sm font-medium dark:text-gray-400">
+                    {AssignedEmployee.diploma}
+                </td>
+
+                <td class="px-6 text-sm font-medium dark:text-gray-400">
+                    <button>Remove</button>
+                </td>
+            </tr>
+        )
+
+
+    }
+
+    function checkFormationAssignContraints(assign, id) {
+        // The can be assigned once
+        let result = true;
+        // Contraint 1
+        assign.forEach((employeeId) => {
+            if (employeeId == id) result = false;
+        })
+        return result;
+
+    }
 
     return (
         <div class="fixed z-20 top-0 left-0 h-[100vh] w-[100%] bg-black/50 flex flex-col justify-center items-center">
@@ -86,63 +124,90 @@ export default function Form() {
                                         Diploma
                                     </th>
                                     <th class="px-6 py-4 font-medium dark:text-gray-400">
-                                        Level
-                                    </th>
-                                    <th class="px-6 py-4 font-medium dark:text-gray-400">
                                         Action
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="border-b border-gray-200 dark:border-gray-800">
-                                    <td class="px-6 text-sm font-medium dark:text-gray-400">
-                                        JHON
-                                    </td>
-                                    <td class="px-6 text-sm font-medium dark:text-gray-400">
-                                        DIPLOMA
-                                    </td>
-                                    <td class="px-6 text-sm font-medium dark:text-gray-400">
-                                        LEVEL
-                                    </td>
-                                    <td class="px-6 text-sm font-medium dark:text-gray-400">
-                                        <button>Remove</button>
-                                    </td>
-                                </tr>
+                                {
+                                    selectedFormationAssign && employees ? selectedFormationAssign.assign.map(employeeId => getEmloyee(employeeId)) : ""
+                                }
                             </tbody>
                         </table>
                     </div>
 
                     <div class="mb-5">
-                        <label
-                            for="password"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                            Select Employee
-                        </label>
-                        <select
-                            onChange={(e) => setAssignEmployeeId(e.target.value)}
-                            id="status"
-                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-                        >
-                            {
-                                employees ? employees.map(employee => <option value={employee.id}> {employee.fullName} </option>) : ""
-                            }
 
-                        </select>
+                        {
+                            assignFormType == "byDiploma" ?
+                                <>
+                                    <label
+                                        for="password"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                    >
+                                        Select Diploma
+                                    </label>
+                                    <select
+                                        onChange={(e) => setAssignEmployeeId(e.target.value)}
+                                        id="status"
+                                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                                    >
+                                        <option value="">Not Selected</option>
+                                        <option>Technicien</option>
+                                        <option>Technicien Spécialisé</option>
+                                        <option>Ingenieur</option>
+
+                                    </select>
+                                </>
+                                :
+                                <>
+                                    <label
+                                        for="password"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                    >
+                                        Select Employee
+                                    </label>
+                                    <select
+                                        onChange={(e) => setAssignEmployeeId(e.target.value)}
+                                        id="status"
+                                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                                    >
+                                        <option value="">Not Selected</option>
+                                        {
+                                            employees ? employees.map(employee => <option value={employee.id}> {employee.fullName} </option>) : ""
+                                        }
+
+                                    </select>
+                                </>
+                        }
                     </div>
 
 
 
-                    <div class="basis-[100%] flex justify-start items-center">
-                        <button
-                            onClick={assign}
-                            type="button"
-                            class="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                        >
-                            Assign Employee
-                        </button>
+                    {
+                        assignFormType == "byDiploma" ?
+                            <div class="basis-[100%] flex justify-start items-center">
+                                <button
+                                    onClick={assign}
+                                    type="button"
+                                    class="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                                >
+                                    Assign Employees
+                                </button>
 
-                    </div>
+                            </div>
+                            :
+                            <div class="basis-[100%] flex justify-start items-center">
+                                <button
+                                    onClick={assign}
+                                    type="button"
+                                    class="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                                >
+                                    Assign Employee
+                                </button>
+
+                            </div>
+                    }
                 </form>
             </div>
         </div >
