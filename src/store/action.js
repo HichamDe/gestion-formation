@@ -37,3 +37,15 @@ export function setSelectedFormation(data) {
 export function setFormationFormVisibility(data) {
   return { type: "setFormationFormVisibility", payload: data };
 }
+
+// Assign
+export function setSelectedFormationAssign(data) {
+  return { type: "setSelectedFormationAssign", payload: data };
+}
+
+export function setAssignFormType(data) {
+  return { type: "setAssignFormType", payload: data }
+}
+export function setAssignFormVisibility(data) {
+  return { type: "setAssignFormVisibility", payload: data }
+}

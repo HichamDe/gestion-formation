@@ -6,7 +6,7 @@ export default function Nav() {
 
   
   return (
-    <section class="sticky top-0 z-20 px-3 py-3 bg-white shadow dark:text-gray-100 dark:bg-gray-900 lg:px-5">
+    <section class="sticky top-0 z-20 px-3 py-3 bg-white shadow dark:text-gray-100 dark:bg-gray-900 lg:px-5 print:hidden">
       <nav class="relative">
         <div class="flex items-center justify-between">
           <div>

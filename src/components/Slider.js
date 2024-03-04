@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 export default function Slider() {
   return (
-    <div class="relative block navbar-menu">
+    <div class="relative block navbar-menu print:hidden">
       <nav
         class="fixed top-14 bottom-0 transition-all   left-0 dark:bg-gray-900 flex flex-col w-[280px] shadow  overflow-hidden z-50"
         id="sidenav"
@@ -68,7 +68,7 @@ export default function Slider() {
             {/* Assigne */}
             <li>
               <Link
-                to="#"
+                to="/assign"
                 class="flex items-center px-6 py-4 text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 group hover:text-gray-600 hover:bg-gray-100"
               >
                 <span

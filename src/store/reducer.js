@@ -15,6 +15,12 @@ const initialState = {
   selectedFormation: "",
   formationFormVisibility: false,
 
+
+  //* Assign
+  selectedFormationAssign: "",
+  assignFormType: "", //add by employee or diploma
+  assignFormVisibility: false
+
 };
 
 export default function reducer(state = initialState, action) {
@@ -50,6 +56,16 @@ export default function reducer(state = initialState, action) {
 
     case "setFormationFormVisibility":
       return { ...state, formationFormVisibility: action.payload };
+
+    //* Assign
+    case "setSelectedFormationAssign":
+      return { ...state, selectedFormationAssign: action.payload };
+
+    case "setAssignFormType":
+      return { ...state, assignFormType: action.payload };
+
+    case "setAssignFormVisibility":
+      return { ...state, assignFormVisibility: action.payload };
 
     default:
       return state;

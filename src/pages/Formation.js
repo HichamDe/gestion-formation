@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Nav from "../components/Nav";
 import Slider from "../components/Slider";
 import { fetcher } from "../utils/crud";
@@ -8,6 +8,7 @@ import Form from "../components/_formation/Form";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { setFormations } from "../store/action";
+import { update } from "../utils/crud";
 
 export default function Formation() {
   const dispatch = useDispatch();
@@ -28,6 +29,53 @@ export default function Formation() {
     });
   }, []);
 
+
+  function checkFormationContraints(formation) {
+    // check if the formation is canceled
+
+    if (formation.state == "CANCELED" || formation.state == "COMPLETED") {
+      // view in a none changeable row
+      return <Row changeable={false} data={formation} />
+
+    } else {
+      // check if the formation is Completed or Active
+      // <option>PROGRAMMED</option>
+      // <option>ACTIVE</option>
+      // <option>COMPLETED</option>
+
+      const startingDate = new Date(formation.starting_date);
+      const endingDate = new Date(formation.ending_date);
+      const currentDate = new Date();
+
+      if (daysDiff(startingDate, currentDate) <= 0) {
+        console.log(daysDiff(endingDate, startingDate))
+        if (daysDiff(endingDate, currentDate) <= 0) {
+          // COMPLETED
+          formation.state = "COMPLETED"
+
+          return <Row changeable={false} data={formation} />;
+        } else {
+          // Updating to Active
+          formation.state = "ACTIVE"
+
+          return <Row changeable={true} data={formation} />;
+        }
+      } else {
+        // Still PROGRAMMED
+        return <Row changeable={true} data={formation} />;
+      }
+
+
+    }
+
+
+
+  }
+
+  function daysDiff(date1, date2) {
+    return (date1 - date2) / (1000 * 60 * 60 * 24);
+  }
+
   return (
     <>
       <div class="xl:h-screen bg-gray-800">
@@ -41,7 +89,7 @@ export default function Formation() {
               <table class="w-full table-auto">
                 <thead class="bg-lightGray-50">
                   <tr class="text-xs text-left text-gray-500 border-b border-gray-200 dark:border-gray-800">
-                   
+
                     <th class="px-6 py-4 font-medium dark:text-gray-400">
                       Title
                     </th>
@@ -64,7 +112,7 @@ export default function Formation() {
                 </thead>
                 <tbody>
                   {formations
-                    ? formations.map((formation) => <Row data={formation} />)
+                    ? formations.map((formation) => checkFormationContraints(formation))
                     : ""}
                 </tbody>
               </table>

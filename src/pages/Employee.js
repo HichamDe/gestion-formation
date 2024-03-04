@@ -52,6 +52,9 @@ export default function Employee() {
                       Diploma
                     </th>
                     <th class="px-6 py-4 font-medium dark:text-gray-400">
+                      Number Of Courses
+                    </th>
+                    <th class="px-6 py-4 font-medium dark:text-gray-400">
                       Actions
                     </th>
                   </tr>

@@ -1,23 +1,16 @@
 {
   "employees": [
     {
-      "id": "4ab1",
       "fullName": "HICHAM IAMIRI",
-      "diploma": "Technicien Spécialisé",
-      "img_url": "",
-      "salary": 8000
-    },
-    {
-      "id": "5b05",
-      "fullName": "HAMZA AMGHARI",
-      "diploma": "Ingenieur",
-      "img_url": "",
-      "salary": 9000
-    },
-    {
-      "id": "29bb",
-      "fullName": "JHON DOE",
       "diploma": "Technicien",
+      "img_url": "",
+      "salary": 3000,
+      "id": "d344"
+    },
+    {
+      "id": "b47b",
+      "fullName": "JHON DOE",
+      "diploma": "Ingenieur",
       "img_url": "",
       "salary": 15000
     }
@@ -25,19 +18,34 @@
   "formations": [
     {
       "title": "WEB FULL STACK",
-      "level": "1",
-      "starting_date": "2024-02-23",
-      "ending_date": "2024-02-25",
-      "state": "COMPLETED",
-      "id": "79b1"
+      "level": "10",
+      "starting_date": "2024-03-01",
+      "ending_date": "2024-03-02",
+      "state": "PROGRAMMED",
+      "id": "c344"
     },
     {
-      "title": "DATABASE ADMINISTRATION",
-      "level": "5",
-      "starting_date": "2024-03-05",
-      "ending_date": "2024-03-19",
+      "title": "MONGO DB ADVANCED",
+      "level": "15",
+      "starting_date": "2024-03-02",
+      "ending_date": "2024-03-05",
       "state": "PROGRAMMED",
-      "id": "a3c3"
+      "id": "b615"
+    },
+    {
+      "title": "REACT JS",
+      "level": "1",
+      "starting_date": "2024-03-12",
+      "ending_date": "2024-03-21",
+      "state": "CANCELED",
+      "id": "52a7"
+    }
+  ],
+  "assign": [
+    {
+      "id": "e247",
+      "formation_id": "c344",
+      "employee_id": "b47b"
     }
   ]
 }

@@ -76,23 +76,24 @@ export default function Form() {
   }, [selectedEmployee]);
 
   return (
-    <div class="fixed z-20 top-0 left-0 h-[100vh] w-[100%] bg-black/50 flex flex-row-reverse justify-center items-center">
-      <svg
-        onClick={close}
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className="w-8 h-8 text-white cursor-pointer"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-        />
-      </svg>
-
+    <div class="print:hidden fixed z-20 top-0 left-0 h-[100vh] w-[100%] bg-black/50 flex flex-col justify-center items-center">
+      <div className="lg:w-[30%] md:w-[40%] w-[60%]">
+        <svg
+          onClick={close}
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-8 h-8 text-white cursor-pointer float-right -mr-7"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+          />
+        </svg>
+      </div>
       <div class="flex flex-wrap justify-center items-center gap-4 border lg:w-[30%] md:w-[40%] w-[60%] p-5 rounded-lg border-gray-700 bg-gray-900 ">
         <form class="max-w-sm mx-auto">
           <h1 className="text-white text-4xl mb-5 text-bold">{employeeFormType == "add" ? "Add" : "Update"} Employee</h1>

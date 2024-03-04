@@ -55,9 +55,6 @@ export default function Form() {
 
     dispatch(setFormationFormVisibility(false));
 
-    fetcher("http://localhost:8000/formations").then((data) => {
-      dispatch(setFormations(data));
-    });
   }
 
   function close() {
@@ -81,22 +78,24 @@ export default function Form() {
   }, [selectedFormation]);
 
   return (
-    <div class="fixed z-20 top-0 left-0 h-[100vh] w-[100%] bg-black/50 flex flex-row-reverse justify-center items-center">
-      <svg
-        onClick={close}
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className="w-8 h-8 text-white cursor-pointer"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-        />
-      </svg>
+    <div class="fixed z-20 top-0 left-0 h-[100vh] w-[100%] bg-black/50 flex flex-col justify-center items-center print:hidden">
+      <div className="lg:w-[30%] md:w-[40%] w-[60%]">
+        <svg
+          onClick={close}
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-8 h-8 text-white cursor-pointer float-right -mr-7"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+          />
+        </svg>
+      </div>
 
       <div class="flex flex-wrap justify-center items-center gap-4 border lg:w-[30%] md:w-[40%] w-[60%] p-5 rounded-lg border-gray-700 bg-gray-900 ">
         <form class="max-w-sm mx-auto">
@@ -186,25 +185,42 @@ export default function Form() {
             </div>
 
           ) : (
-            <div class="mb-5">
-              <label
-                for="password"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                State
-              </label>
-              <select
-                id="status"
-                onChange={(e) => setState(e.target.value)}
-                value={state}
-                class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-              >
-                <option>ACTIVE</option>
-                <option>COMPLETED</option>
-                <option>CANCELED</option>
-                <option>PROGRAMMED</option>
-              </select>
-            </div>
+            <>
+              <div class="mb-5">
+                <label
+                  for="password"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  State
+                </label>
+                <select
+                  id="status"
+                  onChange={(e) => setState(e.target.value)}
+                  value={state}
+                  class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                >
+
+                  <option>PROGRAMMED</option>
+                  <option>CANCELED</option>
+                </select>
+              </div>
+              <div class="flex items-start mb-5">
+                <label
+                  for="terms"
+                  class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                >
+                  Note That You Can't Go Back After 
+                  <a
+                    href="#"
+                    class="text-red-600 ms-1 hover:underline dark:text-red-500"
+                  >
+                    Setting The State to CANCELED
+                  </a>
+                </label>
+              </div>
+            </>
+
+
           )}
           <div class="basis-[100%] flex justify-start items-center">
             {formationFormType == "add" ? (

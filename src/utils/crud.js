@@ -17,6 +17,7 @@ export function update(url, data, id) {
   return axios
     .put(url, data)
     .then((res) => {
+      console.log("updated succesfully")
       return res.data;
     })
     .catch((err) => {

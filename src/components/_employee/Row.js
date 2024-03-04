@@ -40,7 +40,8 @@ export default function Row(props) {
       <td class="px-6 text-sm font-medium dark:text-gray-400">
         {props.data.diploma}
       </td>
-
+      <td class="px-6 text-sm font-medium dark:text-gray-400">
+      </td>
       <td class="px-6">
         <div class="flex ">
           <button
