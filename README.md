@@ -4,4 +4,4 @@ This project is simply for companies to add courses and workers assign them one 
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://raw.githubusercontent.com/HichamDe/gestion-formation/main/docs/sc4.png)
