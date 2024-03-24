@@ -1,4 +1,5 @@
 const initialState = {
+
   //* Employee
   employees: "",
   employeeFormType: "add", // add or update
@@ -9,12 +10,10 @@ const initialState = {
   isVisibale: false,
 
   //* Formation
-
   formations: "",
   formationFormType: "add", // add or update
   selectedFormation: "",
   formationFormVisibility: false,
-
 
   //* Assign
   selectedFormationAssign: "",
@@ -25,6 +24,7 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+
     //* Employee
 
     case "setEmployees":

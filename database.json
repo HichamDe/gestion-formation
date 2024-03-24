@@ -1,27 +1,6 @@
 {
   "employees": [
     {
-      "fullName": "HICHAM IAMIRI",
-      "diploma": "Technicien",
-      "img_url": "dfgf",
-      "salary": 3000,
-      "id": "d344"
-    },
-    {
-      "id": "b47b",
-      "fullName": "JHON DOE",
-      "diploma": "Ingenieur",
-      "img_url": "",
-      "salary": 15000
-    },
-    {
-      "id": "e3ac",
-      "fullName": "HAMZA AMGHARI",
-      "diploma": "Technicien Spécialisé",
-      "img_url": "",
-      "salary": 6000
-    },
-    {
       "id": "8b6d",
       "fullName": "HMAD OBIHI",
       "diploma": "Ingenieur",
@@ -31,13 +10,13 @@
   ],
   "formations": [
     {
-      "title": "hicha.bsns@gmail.com",
-      "level": "20",
-      "starting_date": "2024-03-06",
-      "ending_date": "2024-03-15",
-      "state": "CANCELED",
-      "assign": [],
-      "id": "7c0d"
+      "id": "b406",
+      "title": "JAVASCRIPT",
+      "level": "1",
+      "starting_date": "2024-03-24",
+      "ending_date": "2024-03-26",
+      "state": "PROGRAMMED",
+      "assign": []
     }
   ]
 }
